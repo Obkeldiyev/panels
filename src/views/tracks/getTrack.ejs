@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Page</title>
+    <script>
+        let mouseMovementsCount = 0;
+        let typedKeysCount = 0;
+        let trackingId = null;
+
+        // Track mouse movements
+        document.addEventListener('mousemove', () => {
+            mouseMovementsCount++;
+        });
+
+        // Track key presses
+        document.addEventListener('keydown', () => {
+            typedKeysCount++;
+        });
+
+        // Function to start tracking
+        async function startTracking() {
+            try {
+                const response = await fetch('/start', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                const result = await response.json();
+                if (result.trackingId) {
+                    trackingId = result.trackingId;
+                    alert(result.message);
+                    setInterval(updateTracking, 5000); // Send updates every 5 seconds
+                } else {
+                    alert('Error starting tracking.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Function to update tracking with work duration and mouse movements
+        async function updateTracking() {
+            try {
+                if (trackingId) {
+                    const response = await fetch('/update', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            trackingId,
+                            workDuration: 1, // Increment work duration (example: 1 minute)
+                            mouseMovements: mouseMovementsCount,
+                            typedKeys: typedKeysCount
+                        }),
+                    });
+                    const result = await response.json();
+                    if (result.message) {
+                        console.log(result.message);
+                    }
+                }
+            } catch (error) {
+                console.error('Error updating tracking:', error);
+            }
+        }
+
+        // Function to stop tracking
+        async function stopTracking() {
+            try {
+                const response = await fetch('/stop', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ trackingId })
+                });
+                const result = await response.json();
+                alert(result.message);
+            } catch (error) {
+                console.error('Error stopping tracking:', error);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Tracking System</h1>
+
+    <!-- Tracking Actions -->
+    <div>
+        <h2>Start Tracking</h2>
+        <button onclick="startTracking()">Start Tracking</button>
+    </div>
+
+    <div>
+        <h2>Stop Tracking</h2>
+        <button onclick="stopTracking()">Stop Tracking</button>
+    </div>
+</body>
+</html>

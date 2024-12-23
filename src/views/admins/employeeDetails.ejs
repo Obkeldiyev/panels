@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+</head>
+<body>
+    <h1>Employee: <%= employee.first_name %> <%= employee.second_name %></h1>
+    <p>Username: <%= employee.username %></p>
+    <h2>Tracking Records:</h2>
+    <ul>
+        <% employee.trackings.forEach(tracking => { %>
+            <li>
+                <p><strong>Tracking ID:</strong> <%= tracking.id %></p>
+                <p><strong>Started At:</strong> <%= new Date(tracking.startedAt).toLocaleString() %></p>
+                <p><strong>Stop Time:</strong> <%= tracking.stopTime ? new Date(tracking.stopTime).toLocaleString() : "Not stopped yet" %></p>
+                <p><strong>Tracking Duration:</strong> <%= tracking.duration %> seconds</p>
+                <h3>Photos:</h3>
+                <ul>
+                    <% tracking.photos.forEach(photo => { %>
+                        <li>
+                            <img src="/<%= photo.url %>" alt="Screenshot" style="width: 200px;">
+                        </li>
+                    <% }); %>
+                </ul>
+            </li>
+        <% }); %>
+    </ul>
+    <a href="/admins/employees">Back to Employee List</a>
+</body>
+</html>

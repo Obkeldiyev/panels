@@ -1,0 +1,221 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+  }
+  
+  .login-form {
+    position: relative;
+    width: 400px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1.5s ease-out;
+  }
+  
+  .login-form h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    animation: textGlow 2s infinite alternate;
+  }
+  
+  /* Input Styling */
+  .login-form input {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    outline: none;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .login-form input:focus {
+    background: rgba(255, 255, 255, 0.4);
+  }
+  
+  .login-form label {
+    position: absolute;
+    top: 14px;
+    left: 15px;
+    font-size: 1rem;
+    color: transparent;
+    transition: 0.3s ease;
+    z-index: 0;
+  }
+  
+  .login-form input:focus + label,
+  .login-form input:not(:placeholder-shown) + label {
+    color: #ffdd59;
+    transform: translateY(-30px);
+    font-size: 0.8rem;
+  }
+  
+  .login-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    font-size: 1rem;
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    animation: buttonHover 2s infinite alternate;
+  }
+  
+  .login-btn:hover {
+    background: linear-gradient(45deg, #dd2476, #ff512f);
+    box-shadow: 0 5px 20px rgba(255, 81, 47, 0.6);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes textGlow {
+    from {
+      text-shadow: 0 0 10px #ffdd59, 0 0 20px #ffdd59, 0 0 30px #ffdd59;
+    }
+    to {
+      text-shadow: 0 0 5px #2575fc, 0 0 15px #2575fc, 0 0 25px #2575fc;
+    }
+  }
+  
+  @keyframes buttonHover {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.05);
+    }
+  }
+  
+  /* Background Animation */
+  .background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+  
+  .background-animation span {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: move 10s infinite;
+  }
+  
+  @keyframes move {
+    0% {
+      transform: translateY(0) translateX(0);
+    }
+    50% {
+      transform: translateY(-50vh) translateX(50vw);
+    }
+    100% {
+      transform: translateY(-100vh) translateX(-50vw);
+    }
+  }
+  
+  .background-animation span:nth-child(1) {
+    top: 20%;
+    left: 40%;
+    animation-delay: 0s;
+    animation-duration: 10s;
+  }
+  
+  .background-animation span:nth-child(2) {
+    top: 80%;
+    left: 20%;
+    animation-delay: 2s;
+    animation-duration: 8s;
+  }
+  
+  .background-animation span:nth-child(3) {
+    top: 50%;
+    left: 60%;
+    animation-delay: 4s;
+    animation-duration: 12s;
+  }
+  
+  .alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #fff;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInOut 5s ease-in-out forwards;
+  }
+  
+  .alert-success {
+    background-color: #4caf50;
+    border: 1px solid #43a047;
+  }
+  
+  .alert-danger {
+    background-color: #f44336;
+    border: 1px solid #e53935;
+  }
+  
+  /* Animations for Alerts */
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    20% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    80% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+  

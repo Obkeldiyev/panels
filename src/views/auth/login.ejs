@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Login Page</title>
+  <link rel="stylesheet" href="./styles/login.css">
+</head>
+<body>
+  <% if (successMessage.length > 0) { %>
+    <div class="alert alert-success">
+      <%= successMessage %>
+    </div>
+  <% } %>
+  
+  <% if (errorMessage.length > 0) { %>
+    <div class="alert alert-danger">
+      <%= errorMessage %>
+    </div>
+  <% } %>
+  
+  <div class="background-animation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <form action="/login" method="POST" class="login-form">
+    <h2>Welcome Back</h2>
+    <input type="text" name="username" id="username" placeholder=" " required>
+    <label for="username">Username</label>
+    <input type="password" name="password" id="password" placeholder=" " required>
+    <label for="password">Password</label>
+    <button type="submit" class="login-btn">Login</button>
+  </form>
+</body>
+</html>
